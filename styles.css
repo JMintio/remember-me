@@ -4,6 +4,8 @@
   font-size: 16pt;
   margin: 0px;
   padding: 0px;
+  user-select: none;
+  user-zoom: none;
 }
 .body {
   position: fixed;
@@ -101,7 +103,14 @@
   background-color: rgb(255, 145, 0);
   transition-duration: 300ms;
 }
+
+.note_predef:hover {
+  border-radius: 10px;
+  width: 150px;
+  height: 200px;
+}
 .note_close {
+  z-index: 2;
   cursor: pointer;
   display: none;
   position: absolute;
@@ -110,14 +119,14 @@
   margin: 5px;
   background-image: url(/close.svg);
   background-size: cover;
-  filter: invert();
+
   width: 30px;
   height: 30px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
 }
-.note_predef:hover {
-  border-radius: 10px;
-  width: 150px;
-  height: 200px;
+.note_close:hover {
+  background-color: rgb(182, 182, 182);
 }
 /** ------------------------------------ **/
 .footer {
