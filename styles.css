@@ -103,12 +103,13 @@
   background-color: rgb(255, 145, 0);
   transition-duration: 300ms;
 }
-
-.note_predef:hover {
-  border-radius: 10px;
-  width: 150px;
-  height: 200px;
+.note_name {
+  font-size: 11pt;
 }
+.note_inside {
+  font-size: 11pt;
+}
+
 .note_close {
   z-index: 2;
   cursor: pointer;
@@ -128,6 +129,7 @@
 .note_close:hover {
   background-color: rgb(182, 182, 182);
 }
+
 /** ------------------------------------ **/
 .footer {
   position: absolute;
