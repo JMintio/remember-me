@@ -45,6 +45,7 @@ function removeNoteEvent() {
 }
 
 function add_note() {
-  const teste = document.createElement("div");
+  const teste = document.createElement("diasv");
   teste.appendChild(document.createTextNode("teste"));
+  document.querySelector(".diasv").classList.add("note_predef");
 }
