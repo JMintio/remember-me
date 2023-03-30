@@ -11,48 +11,44 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgb(238, 238, 238);
 }
 .header {
   position: relative;
   display: flex;
   width: 100%;
-  height: 40px;
+  height: 60px;
   align-items: center;
   justify-content: center;
-  background-color: white;
   color: rgb(34, 40, 49);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.37);
 }
 .header_menu {
   cursor: pointer;
   position: absolute;
   display: flex;
   left: 10px;
-  width: 30px;
+  width: 50px;
   height: 15px;
   padding: 2px;
   background-image: url(/arrow_fill_down.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  filter: invert();
-  background-color: rgb(218, 101, 6);
   border-radius: 8px;
-  box-shadow: 0px 2px 1px rgb(151, 151, 151);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.37);
+  transition-duration: 200ms;
 }
 .header_menu:hover {
-  background-color: rgba(181, 81, 0, 0.74);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.37);
 }
 .bar_container {
   position: relative;
   display: flex;
   justify-content: left;
   align-items: center;
-  background-color: white;
   width: 98%;
   height: 40px;
-  margin: 5px auto 0px auto;
-  border-radius: 10px;
+  margin: 15px auto 0px auto;
 }
 .add_note {
   position: relative;
@@ -60,33 +56,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 2px 2px 6px;
-  width: fit-content;
+  width: 120px;
+  height: 45px;
   margin-left: 10px;
-  font-size: 12pt;
-  border-radius: 4px;
-  color: white;
-  background-color: rgb(0, 153, 255);
+  border-radius: 25px;
+  color: rgb(20, 20, 20);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.37);
+  transition-duration: 200ms;
 }
 .add_note:hover {
-  background-color: rgb(0, 109, 182);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.37);
 }
-.add_noteStyle {
-  position: absolute;
-  left: 0;
-  border-radius: 4px 0px 0px 4px;
-  height: 100%;
-  width: 4px;
-  background-color: rgb(87, 87, 87);
+.add_noteText {
+  margin: 5px 5px 5px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12pt;
 }
+.add_noteIcon {
+  margin: 5px 0px 5px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  background-color: rgb(0, 94, 172);
+  filter: invert();
+  border-radius: 15px;
+}
+
 .notes_container {
   display: flex;
+  flex-direction: column;
   height: 80%;
-  width: 98%;
-  margin-top: 10px;
   border-radius: 10px;
-  margin: 5px auto 0px auto;
-  background-color: white;
+  margin: 15px auto 0px auto;
 }
 .note_predef {
   position: relative;
@@ -95,7 +99,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  margin: 5px;
+  margin: 5px 0px 5px 10px;
   height: 30px;
   width: 100px;
   font-size: 11pt;
@@ -103,13 +107,22 @@
   background-color: rgb(255, 145, 0);
   transition-duration: 300ms;
 }
+.note_icon {
+  position: absolute;
+  display: none;
+  width: 20px;
+  top: 0px;
+  bottom: 0px;
+  right: 10px;
+  margin: auto;
+}
 .note_name {
+  display: flex;
   font-size: 11pt;
 }
 .note_inside {
   font-size: 11pt;
 }
-
 .note_close {
   z-index: 2;
   cursor: pointer;

@@ -1,51 +1,41 @@
-addNoteEvent();
-let note_inside = document.querySelector(".note_inside");
-note_inside.style.display = "none";
+var insideNote = document.querySelector(".note_inside");
 
-function note_click() {
-  let note_name = document.querySelector(".note_name");
-  note_name.style.display = "none";
-  let note_inside = document.querySelector(".note_inside");
-  note_inside.style.display = "flex";
+insideNote.style.display = "none";
 
-  let note = document.querySelector(".note_predef");
-  let noteClose = document.querySelector(".note_close");
-  note.removeEventListener("click", note_click);
-  note.style.width = "98%";
-  note.style.height = "80%";
-  note.style.borderRadius = "10px";
-  note.style.cursor = "default";
-  noteClose.style.display = "flex";
+var noteBar = document.querySelector(".note_predef");
+var noteIcon = document.querySelector(".note_icon");
+var noteCloseIcon = document.querySelector(".note_close");
 
-  removeNoteEvent();
+noteBar.addEventListener("mouseover", hoverNote, true);
+noteBar.addEventListener("mouseleave", notHoverNote, true);
+noteBar.addEventListener("click", hoverNote, true);
+noteIcon.addEventListener("click", openNote, true);
+noteCloseIcon.addEventListener("click", closeNote, true);
+
+/* noteBar.addEventListener("click", openNote, true); */
+
+function hoverNote() {
+  noteIcon.style.display = "block";
+  noteBar.style.width = "150px";
 }
-
-function note_close() {
-  let note = document.querySelector(".note_predef");
-  let noteClose = document.querySelector(".note_close");
-  let note_inside = document.querySelector(".note_inside");
-  note_inside.style.display = "none";
-  let note_name = document.querySelector(".note_name");
-  note_name.style.display = "flex";
-  noteClose.style.display = "none";
-  note.style.width = "100px";
-  note.style.height = "30px";
-  note.style.borderRadius = "15px";
-  note.style.cursor = "pointer";
-  addNoteEvent();
+function notHoverNote() {
+  noteIcon.style.display = "none";
+  noteBar.style.width = "100px";
 }
-
-function addNoteEvent() {
-  let note = document.querySelector(".note_predef");
-  note.addEventListener("click", note_click, true);
+function openNote() {
+  noteBar.removeEventListener("mouseover", hoverNote, true);
+  noteBar.removeEventListener("mouseleave", notHoverNote, true);
+  noteBar.removeEventListener("click", hoverNote, true);
+  noteIcon.style.display = "none";
+  noteCloseIcon.style.display = "block";
+  noteBar.style.width = "80%";
+  noteBar.style.height = "60%";
 }
-function removeNoteEvent() {
-  let note = document.querySelector(".note_predef");
-  note.removeEventListener("click", note_click);
-}
-
-function add_note() {
-  const teste = document.createElement("diasv");
-  teste.appendChild(document.createTextNode("teste"));
-  document.querySelector(".diasv").classList.add("note_predef");
+function closeNote() {
+  noteCloseIcon.style.display = "none";
+  noteBar.addEventListener("mouseover", hoverNote, true);
+  noteBar.addEventListener("mouseleave", notHoverNote, true);
+  noteBar.addEventListener("click", hoverNote, true);
+  noteBar.style.width = "100px";
+  noteBar.style.height = "30px";
 }
