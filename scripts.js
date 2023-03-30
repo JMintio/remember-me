@@ -28,8 +28,8 @@ function openNote() {
   noteBar.removeEventListener("click", hoverNote, true);
   noteIcon.style.display = "none";
   noteCloseIcon.style.display = "block";
-  noteBar.style.width = "80%";
-  noteBar.style.height = "60%";
+  noteBar.style.width = "95%";
+  noteBar.style.height = "100%";
 }
 function closeNote() {
   noteCloseIcon.style.display = "none";
