@@ -1,18 +1,14 @@
-var insideNote = document.querySelector(".note_inside");
-
+var insideNote = document.querySelector(".noteInside");
 insideNote.style.display = "none";
-
-var noteBar = document.querySelector(".note_predef");
-var noteIcon = document.querySelector(".note_icon");
-var noteCloseIcon = document.querySelector(".note_close");
+var noteBar = document.querySelector(".notePredef");
+var noteIcon = document.querySelector(".noteIcon");
+var noteCloseIcon = document.querySelector(".noteClose");
 
 noteBar.addEventListener("mouseover", hoverNote, true);
 noteBar.addEventListener("mouseleave", notHoverNote, true);
 noteBar.addEventListener("click", hoverNote, true);
 noteIcon.addEventListener("click", openNote, true);
 noteCloseIcon.addEventListener("click", closeNote, true);
-
-/* noteBar.addEventListener("click", openNote, true); */
 
 function hoverNote() {
   noteIcon.style.display = "block";
@@ -39,3 +35,6 @@ function closeNote() {
   noteBar.style.width = "100px";
   noteBar.style.height = "30px";
 }
+// ^^^ Open/ Close Note ^^^ //
+var menuBtnOpen = document.querySelector(".headerMenu");
+menuBtnOpen.addEventListener("click", openNote);
