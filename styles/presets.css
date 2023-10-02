@@ -1,0 +1,56 @@
+.img-normalize {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-top {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.flex-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.flex-left {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.flex-right {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.to-center {
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+.to-centerY {
+  top: 0px;
+  bottom: 0px;
+  margin: auto 0 auto 0;
+}
+.to-centerX {
+  left: 0px;
+  right: 0px;
+  margin: 0 auto 0 auto;
+}
+.terminal {
+  position: absolute;
+  bottom: 0px;
+  width: calc(100% - 10px);
+  height: 50px;
+  background-color: black;
+  color: white;
+  padding-left: 10px;
+}

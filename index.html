@@ -5,45 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Remember Me</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/presets.css" />
   </head>
   <body class="body">
-    <div class="header">
-      <div class="headerMenu"></div>
-      <div style="display: flex; position: absolute; right: 10px">
-        <img class="headerLogo" src="/logo.svg" alt="" />
-        <div class="headerText">Remember Me</div>
+    <header class="header flex-center">
+      <img class="header-icon" src="/img/logo.svg" src="calendar" />
+      <p class="header-title">Remember me</p>
+    </header>
+    <section class="control-box to-centerX flex-center">
+      <div class="btn-addNote control-btn-def flex-center">Add Note</div>
+      <div class="btn-addNote control-btn-def flex-center">Select</div>
+    </section>
+    <section class="notes-box to-center">
+      <div class="note-style-def flex-left">
+        <div class="note-title-def">a</div>
+        <div class="note-desc-def">a</div>
       </div>
-    </div>
-    <div class="menuBox">
-      <div class="menuHeader">Remember Me</div>
-      <div class="menuOptions"><img class="menuIcons" src="/home.svg" alt="" /> Home</div>
-      <div class="menuOptions"><img class="menuIcons" src="/settings.svg" alt="" /> Settings</div>
-      <div class="menuOptions"><img class="menuIcons" src="/info.svg" alt="" /> About</div>
-    </div>
-    <div class="barContainer">
-      <div class="addNote">
-        <img src="/add_FILL0_wght400_GRAD0_opsz48.svg" class="addNoteIcon" />
-        <div class="addNoteText">New note</div>
-      </div>
-    </div>
-    <div class="notesContainer">
-      <div class="notePredef">
-        <div class="noteName">
-          note name <img class="noteIcon" src="/expand_content_FILL0_wght400_GRAD0_opsz48.svg" alt="" />
-        </div>
-        <div class="noteInside">
-          note inside note inside note inside note inside note inside note inside note inside note inside
-        </div>
-        <div class="noteClose"></div>
-      </div>
-    </div>
-    <div class="footer">
-      <div class="footergrid1"></div>
-      <div class="footergrid2"></div>
-      <div class="footergrid3"></div>
-      <div class="footergrid4"></div>
-    </div>
-    <script src="/scripts.js"></script>
+    </section>
+    <script src="/scripts/"></script>
+    <script type="module" src="/scripts/firebase.js"></script>
   </body>
 </html>
