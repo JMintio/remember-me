@@ -19,7 +19,7 @@
   background-color: white;
 }
 .header-icon {
-  width: 20px;
+  width: 30px;
   margin-right: 10px;
 }
 .header-title {
@@ -29,28 +29,103 @@
   font-size: 16pt;
 }
 /* Header */
-/* Control Panel */
-.control-box {
-  justify-content: space-around !important;
-  height: 80px;
-  width: calc(100% - 20px);
-}
-.control-btn-def {
+/* Menu Panel */
+.btn-menu {
+  z-index: 1;
   cursor: pointer;
-  height: 40px;
-  width: 120px;
-  border-radius: 8px;
-
-  font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
   color: white;
-  background-color: rgb(2, 131, 255);
-  border: 1px solid rgb(2, 131, 255);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 110, 255);
 }
-.control-btn-def:hover {
+.btn-menu:hover {
+  color: rgb(0, 110, 255);
+  border: 1px solid rgb(0, 110, 255);
   background-color: white;
-  color: rgb(2, 131, 255);
-  border: 1px solid rgb(2, 131, 255);
 }
+.btn-menu-cover {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  color: white;
+  background-color: rgb(0, 110, 255);
+  border: 1px solid rgb(0, 110, 255);
+}
+.over-btn-home {
+  animation: animOverBtnHome 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.out-btn-home {
+  animation: animOutBtnHome 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@keyframes animOverBtnHome {
+  0% {
+    width: 50px;
+    height: 50px;
+  }
+  100% {
+    width: 0px;
+    height: 0%;
+  }
+}
+@keyframes animOutBtnHome {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+  100% {
+    width: 50px;
+    height: 50px;
+  }
+}
+@keyframes animOverBtnHome {
+  0% {
+    width: 50px;
+    height: 50px;
+  }
+  100% {
+    width: 0px;
+    height: 0%;
+  }
+}
+
+.sidebar {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  height: 0px;
+  width: 30px;
+  border-radius: 8px;
+  background-color: rgb(0, 110, 255);
+}
+.openSidebar {
+  animation: openSidebar 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.closeSidebar {
+  animation: closeSidebar 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@keyframes openSidebar {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 300px;
+  }
+}
+@keyframes closeSidebar {
+  0% {
+    height: 300px;
+  }
+  100% {
+    height: 0px;
+  }
+}
+/* Menu Panel */
 .notes-box {
   width: calc(100% - 20px);
   height: calc(100% - 150px);
