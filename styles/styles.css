@@ -31,7 +31,7 @@
 }
 /* Header */
 /* Menu Panel */
-.btn-menu {
+.btn-menu-normal {
   z-index: 2;
   cursor: pointer;
   position: absolute;
@@ -45,12 +45,30 @@
   border: 1px solid rgb(0, 110, 255);
   transition-duration: 200ms;
 }
-.btn-menu:hover {
+.btn-menu-normal:hover {
   color: rgb(0, 110, 255);
   border: 1px solid rgb(0, 110, 255);
   background-color: rgb(240, 240, 240);
 }
-
+.btn-menu-cancel {
+  z-index: 2;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 50px;
+  height: 30px;
+  border-radius: 8px;
+  color: white;
+  background-color: rgb(235, 58, 58);
+  border: 1px solid rgb(235, 58, 58);
+  transition-duration: 200ms;
+}
+.btn-menu-cancel:hover {
+  color: rgb(235, 58, 58);
+  border: 1px solid rgb(235, 58, 58);
+  background-color: rgb(240, 240, 240);
+}
 .sidebar {
   z-index: 2;
   flex-direction: column;
