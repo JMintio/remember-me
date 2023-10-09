@@ -6,21 +6,32 @@
     <title>Remember Me</title>
     <link rel="stylesheet" href="/styles/styles.css" />
     <link rel="stylesheet" href="/styles/presets.css" />
+    <link rel="stylesheet" href="styles/notes.css" />
   </head>
   <body class="body">
     <header class="header flex-center">
-      <img class="header-icon" src="/img/logo-im.png" src="calendar" />
-      <p class="header-title">Remember me</p>
+      <img class="header-icon" src="/img/logo.png" src="calendar" />
+      <p class="header-title">green list</p>
     </header>
     <div class="btn-menu flex-center">
       <p style="font-size: 9pt; z-index: 1">menu</p>
       <div class="btn-menu-cover"></div>
     </div>
-    <div class="sidebar"></div>
+    <div class="sidebar flex-top">
+      <div class="add-new-note sidebar-icons flex-center" alt="">
+        <img style="filter: invert()" src="/img/add-note.svg" alt="add note" />
+        <p class="sidebar-texts">Add note</p>
+      </div>
+      <div class="select-notes sidebar-icons flex-center" alt="">
+        <img style="filter: invert()" src="/img/select.svg" alt="add note" />
+        <p class="sidebar-texts">Select notes</p>
+      </div>
+    </div>
+
     <section class="notes-box to-center">
       <div class="note-style-def flex-left">
-        <div class="note-title-def">a</div>
-        <div class="note-desc-def">a</div>
+        <div class="note-check flex-center"><img class="note-icon-done" src="/img/done.svg" alt="done" /></div>
+        <input class="note-desc-def" placeholder="Digite o texto..." />
       </div>
     </section>
     <script src="scripts/scripts.js"></script>

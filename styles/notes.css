@@ -1,0 +1,59 @@
+.notes-box {
+  width: calc(100% - 20px);
+  height: calc(100% - 150px);
+}
+.note-check {
+  cursor: pointer;
+  position: absolute;
+  left: -50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: white;
+}
+.note-style-def {
+  position: relative;
+  display: flex;
+  justify-content: center !important;
+  flex-direction: column;
+  align-items: start !important;
+
+  margin-top: 10px;
+  margin-left: 50px;
+  min-height: 40px;
+  width: calc(100% - 50px);
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  text-wrap: wrap;
+}
+
+.note-desc-def {
+  text-wrap: wrap;
+  margin: 10px 0px 10px 10px;
+  height: 20px;
+  width: calc(100% - 50px);
+  border: 0px;
+}
+.note-icon-done {
+  opacity: 30%;
+}
+.note-icon-done:hover {
+  opacity: 100%;
+}
+.shakeAnim {
+  animation: shakeNotes 300ms infinite ease;
+}
+@keyframes shakeNotes {
+  0% {
+    transform: rotate(0deg);
+  }
+  35% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-0.5deg);
+  }
+}

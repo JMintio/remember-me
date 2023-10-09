@@ -27,81 +27,53 @@
   width: fit-content;
   font-weight: lighter;
   font-size: 16pt;
+  color: green;
 }
 /* Header */
 /* Menu Panel */
 .btn-menu {
-  z-index: 1;
+  z-index: 2;
   cursor: pointer;
   position: absolute;
   bottom: 10px;
   left: 10px;
   width: 50px;
-  height: 50px;
-  border-radius: 50px;
+  height: 30px;
+  border-radius: 8px;
   color: white;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 110, 255);
   border: 1px solid rgb(0, 110, 255);
+  transition-duration: 200ms;
 }
 .btn-menu:hover {
   color: rgb(0, 110, 255);
   border: 1px solid rgb(0, 110, 255);
-  background-color: white;
-}
-.btn-menu-cover {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  color: white;
-  background-color: rgb(0, 110, 255);
-  border: 1px solid rgb(0, 110, 255);
-}
-.over-btn-home {
-  animation: animOverBtnHome 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.out-btn-home {
-  animation: animOutBtnHome 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-@keyframes animOverBtnHome {
-  0% {
-    width: 50px;
-    height: 50px;
-  }
-  100% {
-    width: 0px;
-    height: 0%;
-  }
-}
-@keyframes animOutBtnHome {
-  0% {
-    width: 0px;
-    height: 0px;
-  }
-  100% {
-    width: 50px;
-    height: 50px;
-  }
-}
-@keyframes animOverBtnHome {
-  0% {
-    width: 50px;
-    height: 50px;
-  }
-  100% {
-    width: 0px;
-    height: 0%;
-  }
+  background-color: rgb(240, 240, 240);
 }
 
 .sidebar {
+  z-index: 2;
+  flex-direction: column;
   position: absolute;
   bottom: 40px;
   left: 20px;
   height: 0px;
   width: 30px;
   border-radius: 8px;
-  background-color: rgb(0, 110, 255);
+}
+.anim-btn-menu {
+  animation: animBtnMenu 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@keyframes animBtnMenu {
+  0% {
+    bottom: 10px;
+  }
+  50% {
+    bottom: 20px;
+  }
+  100% {
+    bottom: 10px;
+  }
 }
 .openSidebar {
   animation: openSidebar 200ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -111,44 +83,41 @@
 }
 @keyframes openSidebar {
   0% {
+    opacity: 0%;
     height: 0px;
   }
   100% {
-    height: 300px;
+    opacity: 100%;
+    height: 100px;
   }
 }
 @keyframes closeSidebar {
   0% {
-    height: 300px;
+    opacity: 100%;
+    height: 100px;
   }
   100% {
+    opacity: 0%;
     height: 0px;
   }
 }
-/* Menu Panel */
-.notes-box {
-  width: calc(100% - 20px);
-  height: calc(100% - 150px);
-}
-.note-style-def {
-  flex-direction: column;
-  align-items: start !important;
-
-  height: 80px;
-  width: 100%;
-  background-color: rgb(255, 255, 255);
+.sidebar-icons {
+  cursor: pointer;
+  margin-bottom: 15px;
   border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(0, 110, 255);
 }
-.note-title-def {
-  font-weight: bold;
-  font-size: 14pt;
-  margin-left: 10px;
-  height: fit-content;
-  width: fit-content;
-}
-
-.note-desc-def {
-  margin-left: 10px;
-  height: fit-content;
-  width: fit-content;
+.sidebar-texts {
+  position: absolute;
+  text-wrap: nowrap;
+  width: 80px;
+  font-size: 9pt;
+  left: 33px;
+  padding: 5px 0px 5px 0px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0);
 }
