@@ -59,6 +59,7 @@ function addNewNote() {
   // ADDING NEW NOTES FUNCTION
   closeSidebar();
   i++;
+  var ID = "ID"+i
 
   var newNote = document.createElement("div");
   var noteDesc = document.createElement("input");
@@ -66,18 +67,29 @@ function addNewNote() {
   var noteCheckIcon = document.createElement("img");
 
   //NOTE
-  newNote.classList.add("note-style-def", "note-style-def", `ID_01${i}`);
+  newNote.classList.add("note-style-def", "note-style-def", ID);
   //CHECK
-  noteCheck.classList.add("note-check", "flex-center", `ID_02${i}`);
-  noteCheckIcon.classList.add("note-icon-done", `ID_02${i}`);
+  noteCheck.classList.add("note-check", "flex-center", ID);
+  noteCheckIcon.classList.add("note-icon-done", ID);
   noteCheckIcon.src = "./img/done.svg";
   //DESCRIPTION
   noteDesc.placeholder = "Digite o texto...";
-  noteDesc.classList.add("note-desc-def", `ID_03${i}`);
+  noteDesc.classList.add("note-desc-def", ID);
 
   var notesBox = document.querySelector(".notes-box");
   notesBox.appendChild(newNote);
   newNote.appendChild(noteCheck);
   noteCheck.appendChild(noteCheckIcon);
   newNote.appendChild(noteDesc);
+
+  noteCheck.addEventListener("click", () => {
+    noteChecked(ID);
+  });
+  
 }
+function noteChecked(id){
+  document.querySelector(`.note-style-def.${id}`).remove()
+}
+  console.log("Elemento clicado:");
+
+
