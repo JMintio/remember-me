@@ -3,12 +3,20 @@ var btnCover = document.querySelector(".btn-menu-cover");
 var btnMenu = document.querySelector(".btn-menu");
 var sidebar = document.querySelector(".sidebar");
 var btnMenuText = document.querySelector(".btn-menu-text");
+var blurBackground = document.querySelector(".blur-background");
+var confirmBox = document.querySelector(".confirm-box");
+var btnConfirm = document.querySelector(".btn-confirm");
+var btnCancel = document.querySelector(".btn-cancel");
+var btnClose = document.querySelector(".confirm-close-icon");
 
+btnConfirm.addEventListener("click", checkConfirm);
+btnCancel.addEventListener("click", checkCancel);
+btnClose.addEventListener("click", checkCancel);
 btnMenu.addEventListener("click", openSidebar);
 body.addEventListener("click", closeSidebar);
 
 sidebar.style.display = "none";
-
+openSidebar(); /////////////////////////////////////////////////////////
 function openSidebar() {
   // OPEN SIDE BAR FUNCTION
   if (sidebar.style.display == "flex") {
@@ -53,13 +61,13 @@ function selectNotes() {
 }
 
 /* Adding notes */
-var i = 1000;
+var ID_Counter = 1000;
 document.querySelector(".add-new-note").addEventListener("click", addNewNote);
 function addNewNote() {
   // ADDING NEW NOTES FUNCTION
-  closeSidebar();
-  i++;
-  var ID = "ID"+i
+  /* closeSidebar(); */ ///////////////////////////////////////////////////////////
+  ID_Counter++;
+  var ID = "ID" + ID_Counter;
 
   var newNote = document.createElement("div");
   var noteDesc = document.createElement("input");
@@ -85,11 +93,30 @@ function addNewNote() {
   noteCheck.addEventListener("click", () => {
     noteChecked(ID);
   });
-  
 }
-function noteChecked(id){
-  document.querySelector(`.note-style-def.${id}`).remove()
+
+var IDnow = "";
+function noteChecked(id) {
+  IDnow = id;
+  blurBackground.style.display = "block";
+  confirmBox.style.display = "block";
 }
-  console.log("Elemento clicado:");
 
+function checkConfirm() {
+  document.querySelector(`.note-style-def.${IDnow}`).classList.add("toLeftAnim");
+  setTimeout(() => {
+    document.querySelector(`.note-style-def.${IDnow}`).remove();
+  }, 300);
 
+  blurBackground.style.display = "none";
+  confirmBox.style.display = "none";
+}
+
+function checkCancel() {
+  blurBackground.style.display = "none";
+  confirmBox.style.display = "none";
+}
+
+document.addEventListener("click", function (event) {
+  console.log(IDnow);
+});
