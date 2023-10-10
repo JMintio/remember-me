@@ -231,6 +231,8 @@
   color: white;
   background-color: rgb(235, 58, 58);
   border: 1px solid rgb(235, 58, 58);
+
+  color: rgb;
 }
 .toLeftAnim {
   animation: noteToLeft 300ms 1 cubic-bezier(0.78, -0.56, 0.61, 1);
