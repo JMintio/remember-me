@@ -100,7 +100,7 @@ function addNewNote() {
 
   let timeoutId;
 
-  newNote.addEventListener("mousedown", function () {
+  newNote.addEventListener("mousedown", () => {
     timeoutId = setTimeout(function () {
       console.log("Clique longo detectado!");
       priorityBox.style.display = "block";
