@@ -4,10 +4,14 @@ var btnMenu = document.querySelector(".btn-menu");
 var sidebar = document.querySelector(".sidebar");
 var btnMenuText = document.querySelector(".btn-menu-text");
 var blurBackground = document.querySelector(".blur-background");
+var priorityBox = document.querySelector(".priority-box");
 var confirmBox = document.querySelector(".confirm-box");
 var btnConfirm = document.querySelector(".btn-confirm");
 var btnCancel = document.querySelector(".btn-cancel");
 var btnClose = document.querySelector(".confirm-close-icon");
+var priority01 = "rgb(255, 255, 255)";
+var priority02 = "rgb(235, 223, 64)";
+var priority03 = "rgb(235, 58, 58)";
 
 btnConfirm.addEventListener("click", checkConfirm);
 btnCancel.addEventListener("click", checkCancel);
@@ -92,6 +96,19 @@ function addNewNote() {
 
   noteCheck.addEventListener("click", () => {
     noteChecked(ID);
+  });
+
+  let timeoutId;
+
+  newNote.addEventListener("mousedown", function () {
+    timeoutId = setTimeout(function () {
+      console.log("Clique longo detectado!");
+      priorityBox.style.display = "block";
+    }, 500);
+  });
+
+  newNote.addEventListener("mouseup", function () {
+    clearTimeout(timeoutId);
   });
 }
 
