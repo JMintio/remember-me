@@ -19,9 +19,9 @@
   align-items: start !important;
 
   margin-top: 10px;
-  margin-left: 50px;
+  margin-left: px;
   height: 40px;
-  width: calc(100% - 50px);
+  width: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
   text-wrap: wrap;
@@ -40,20 +40,32 @@
 .note-icon-done:hover {
   opacity: 100%;
 }
-.shakeAnim {
-  animation: shakeNotes 300ms infinite ease;
+
+.noteFromRight {
+  animation: noteFromRight 300ms 1 ease;
 }
-@keyframes shakeNotes {
+@keyframes noteFromRight {
+  100% {
+    left: 0px;
+  }
+}
+.noteFromLeft {
+  animation: noteFromLeft 300ms 1 ease;
+}
+@keyframes noteFromLeft {
+  100% {
+    left: 0px;
+  }
+}
+
+.toLeftAnim {
+  animation: noteToLeft 300ms 1 ease-in;
+}
+@keyframes noteToLeft {
   0% {
-    transform: rotate(0deg);
-  }
-  35% {
-    transform: rotate(0.5deg);
-  }
-  75% {
-    transform: rotate(0deg);
+    transform: translateX(0px);
   }
   100% {
-    transform: rotate(-0.5deg);
+    transform: translateX(-120%);
   }
 }

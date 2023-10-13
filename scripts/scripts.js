@@ -12,10 +12,8 @@ var btnClose = document.querySelector(".confirm-close-icon");
 var priority01 = "rgb(255, 255, 255)";
 var priority02 = "rgb(235, 223, 64)";
 var priority03 = "rgb(235, 58, 58)";
+var IDnow = "";
 
-btnConfirm.addEventListener("click", checkConfirm);
-btnCancel.addEventListener("click", checkCancel);
-btnClose.addEventListener("click", checkCancel);
 btnMenu.addEventListener("click", openSidebar);
 body.addEventListener("click", closeSidebar);
 
@@ -78,13 +76,10 @@ function addNewNote() {
   var noteCheck = document.createElement("div");
   var noteCheckIcon = document.createElement("img");
 
-  //NOTE
   newNote.classList.add("note-style-def", "note-style-def", ID);
-  //CHECK
   noteCheck.classList.add("note-check", "flex-center", ID);
   noteCheckIcon.classList.add("note-icon-done", ID);
   noteCheckIcon.src = "./img/done.svg";
-  //DESCRIPTION
   noteDesc.placeholder = "Digite o texto...";
   noteDesc.classList.add("note-desc-def", ID);
 
@@ -98,42 +93,100 @@ function addNewNote() {
     noteChecked(ID);
   });
 
-  let timeoutId;
-
-  newNote.addEventListener("mousedown", () => {
-    timeoutId = setTimeout(function () {
-      console.log("Clique longo detectado!");
-      priorityBox.style.display = "block";
-    }, 500);
+  let isDragging = false;
+  let offsetX;
+  //MOUSE DOWN
+  newNote.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - newNote.getBoundingClientRect().left;
   });
+  //MOVING
+  document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+      const x = e.clientX - offsetX;
 
-  newNote.addEventListener("mouseup", function () {
-    clearTimeout(timeoutId);
+      newNote.style.left = x - 10 + "px";
+
+      if (newNote.offsetLeft >= 60) {
+        newNote.style.left = 50 + "px";
+      } else if (newNote.offsetLeft <= -40) {
+        newNote.style.left = -50 + "px";
+      }
+    }
+  });
+  //MOUSE UP
+  document.addEventListener("mouseup", () => {
+    IDnow = ID;
+    isDragging = false;
+    if (newNote.offsetLeft > 0) {
+      newNote.classList.add("noteFromRight");
+      setTimeout(() => {
+        newNote.classList.remove("noteFromRight");
+        newNote.style.left = "0px";
+      }, 300);
+    } else if (newNote.offsetLeft < 0) {
+      newNote.classList.add("noteFromLeft");
+      setTimeout(() => {
+        newNote.classList.remove("noteFromLeft");
+        newNote.style.left = "0px";
+      }, 300);
+    }
+    if (newNote.offsetLeft == 60) {
+      console.log(IDnow);
+      noteChecked(IDnow);
+    }
+  });
+  //TOUCH DOWN
+  newNote.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    const touch = e.touches[0];
+    offsetX = touch.clientX - newNote.getBoundingClientRect().left;
+  });
+  //MOVING
+  document.addEventListener("touchmove", (e) => {
+    if (isDragging) {
+      const touch = e.touches[0];
+      const x = touch.clientX - offsetX;
+
+      newNote.style.left = x - 10 + "px";
+
+      if (newNote.offsetLeft >= 60) {
+        newNote.style.left = 50 + "px";
+      } else if (newNote.offsetLeft <= -40) {
+        newNote.style.left = -50 + "px";
+      }
+    }
+  });
+  //TOUCH UP
+  document.addEventListener("touchend", () => {
+    isDragging = false;
+    IDnow = ID;
+    if (newNote.offsetLeft > 0) {
+      newNote.classList.add("noteFromRight");
+      setTimeout(() => {
+        newNote.classList.remove("noteFromRight");
+        newNote.style.left = "0px";
+      }, 300);
+    } else if (newNote.offsetLeft < 0) {
+      newNote.classList.add("noteFromLeft");
+      setTimeout(() => {
+        newNote.classList.remove("noteFromLeft");
+        newNote.style.left = "0px";
+      }, 300);
+    }
+    if (newNote.offsetLeft == 60) {
+      noteChecked();
+    }
   });
 }
 
-var IDnow = "";
 function noteChecked(id) {
-  IDnow = id;
-  blurBackground.style.display = "block";
-  confirmBox.style.display = "block";
-}
-
-function checkConfirm() {
-  document.querySelector(`.note-style-def.${IDnow}`).classList.add("toLeftAnim");
+  console.log(id);
+  let domClass = document.querySelector(`.${id}`);
+  domClass.classList.add("toLeftAnim");
   setTimeout(() => {
-    document.querySelector(`.note-style-def.${IDnow}`).remove();
-  }, 300);
-
-  blurBackground.style.display = "none";
-  confirmBox.style.display = "none";
+    domClass.remove();
+  }, 299);
+  /* id.classList.add("toLeftAnim");
+  id.remove(); */
 }
-
-function checkCancel() {
-  blurBackground.style.display = "none";
-  confirmBox.style.display = "none";
-}
-
-document.addEventListener("click", function (event) {
-  console.log(IDnow);
-});
