@@ -6,13 +6,11 @@ var btnMenuText = document.querySelector(".btn-menu-text");
 var blurBackground = document.querySelector(".blur-background");
 var priorityBox = document.querySelector(".priority-box");
 var confirmBox = document.querySelector(".confirm-box");
-var btnConfirm = document.querySelector(".btn-confirm");
-var btnCancel = document.querySelector(".btn-cancel");
 var btnClose = document.querySelector(".confirm-close-icon");
 var priority01 = "rgb(255, 255, 255)";
 var priority02 = "rgb(235, 223, 64)";
 var priority03 = "rgb(235, 58, 58)";
-var IDnow = "";
+var currentID = "";
 
 btnMenu.addEventListener("click", openSidebar);
 body.addEventListener("click", closeSidebar);
@@ -64,6 +62,8 @@ function selectNotes() {
 
 /* Adding notes */
 var ID_Counter = 1000;
+addNewNote(); /////////////////////////////////////////////////////////
+
 document.querySelector(".add-new-note").addEventListener("click", addNewNote);
 function addNewNote() {
   // ADDING NEW NOTES FUNCTION
@@ -73,26 +73,57 @@ function addNewNote() {
 
   var newNote = document.createElement("div");
   var noteDesc = document.createElement("input");
+
   var noteCheck = document.createElement("div");
   var noteCheckIcon = document.createElement("img");
 
+  var notePriority = document.createElement("div");
+  var notePriorityIcon = document.createElement("img");
+
+  var notePriority2 = document.createElement("div");
+  var notePriorityIcon2 = document.createElement("img");
+
+  var notePriority3 = document.createElement("div");
+  var notePriorityIcon3 = document.createElement("img");
+
   newNote.classList.add("note-style-def", "note-style-def", ID);
-  noteCheck.classList.add("note-check", "flex-center", ID);
-  noteCheckIcon.classList.add("note-icon-done", ID);
-  noteCheckIcon.src = "./img/done.svg";
   noteDesc.placeholder = "Digite o texto...";
   noteDesc.classList.add("note-desc-def", ID);
 
+  noteCheck.classList.add("note-check", "flex-center", ID);
+  noteCheckIcon.classList.add("note-icon", ID);
+  noteCheckIcon.src = "./img/done.svg";
+
+  notePriority.classList.add("note-priority", "flex-center", ID);
+  notePriorityIcon.classList.add("note-icon", ID);
+  notePriorityIcon.src = "./img/priority.svg";
+
+  notePriority2.classList.add("note-priority2", "flex-center", ID);
+  notePriorityIcon2.classList.add("note-icon", ID);
+  notePriorityIcon2.src = "./img/priority2.svg";
+
+  notePriority3.classList.add("note-priority3", "flex-center", ID);
+  notePriorityIcon3.classList.add("note-icon", ID);
+  notePriorityIcon3.src = "./img/priority3.svg";
+
   var notesBox = document.querySelector(".notes-box");
+
   notesBox.appendChild(newNote);
-  newNote.appendChild(noteCheck);
-  noteCheck.appendChild(noteCheckIcon);
   newNote.appendChild(noteDesc);
 
-  noteCheck.addEventListener("click", () => {
-    noteChecked(ID);
-  });
+  newNote.appendChild(noteCheck);
+  noteCheck.appendChild(noteCheckIcon);
 
+  newNote.appendChild(notePriority);
+  notePriority.appendChild(notePriorityIcon);
+
+  newNote.appendChild(notePriority2);
+  notePriority2.appendChild(notePriorityIcon2);
+
+  newNote.appendChild(notePriority3);
+  notePriority3.appendChild(notePriorityIcon3);
+
+  // ----------------------- MOVING NOTE -----------------------
   let isDragging = false;
   let offsetX;
   //MOUSE DOWN
@@ -109,15 +140,19 @@ function addNewNote() {
 
       if (newNote.offsetLeft >= 60) {
         newNote.style.left = 50 + "px";
-      } else if (newNote.offsetLeft <= -40) {
-        newNote.style.left = -50 + "px";
+      } else if (newNote.offsetLeft <= -140) {
+        newNote.style.left = -150 + "px";
       }
     }
   });
   //MOUSE UP
   document.addEventListener("mouseup", () => {
-    IDnow = ID;
+    console.log(newNote.offsetLeft);
+    currentID = ID;
     isDragging = false;
+    if (newNote.offsetLeft == 60) {
+      noteChecked(currentID);
+    }
     if (newNote.offsetLeft > 0) {
       newNote.classList.add("noteFromRight");
       setTimeout(() => {
@@ -131,9 +166,14 @@ function addNewNote() {
         newNote.style.left = "0px";
       }, 300);
     }
-    if (newNote.offsetLeft == 60) {
-      console.log(IDnow);
-      noteChecked(IDnow);
+    if (newNote.offsetLeft >= -40 && newNote.offsetLeft <= -20) {
+      document.querySelector(`.${currentID}`).style.backgroundColor = "white";
+    }
+    if (newNote.offsetLeft >= -90 && newNote.offsetLeft <= -60) {
+      document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 253, 240)";
+    }
+    if (newNote.offsetLeft >= -140 && newNote.offsetLeft <= -110) {
+      document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 240, 240)";
     }
   });
   //TOUCH DOWN
@@ -152,15 +192,18 @@ function addNewNote() {
 
       if (newNote.offsetLeft >= 60) {
         newNote.style.left = 50 + "px";
-      } else if (newNote.offsetLeft <= -40) {
-        newNote.style.left = -50 + "px";
+      } else if (newNote.offsetLeft <= -140) {
+        newNote.style.left = -150 + "px";
       }
     }
   });
   //TOUCH UP
   document.addEventListener("touchend", () => {
     isDragging = false;
-    IDnow = ID;
+    currentID = ID;
+    if (newNote.offsetLeft == 60) {
+      noteChecked(currentID);
+    }
     if (newNote.offsetLeft > 0) {
       newNote.classList.add("noteFromRight");
       setTimeout(() => {
@@ -174,8 +217,15 @@ function addNewNote() {
         newNote.style.left = "0px";
       }, 300);
     }
-    if (newNote.offsetLeft == 60) {
-      noteChecked();
+
+    if (newNote.offsetLeft >= -40 && newNote.offsetLeft <= -20) {
+      document.querySelector(`.${currentID}`).style.backgroundColor = "white";
+    }
+    if (newNote.offsetLeft >= -90 && newNote.offsetLeft <= -60) {
+      document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 253, 240)";
+    }
+    if (newNote.offsetLeft >= -140 && newNote.offsetLeft <= -110) {
+      document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 240, 240)";
     }
   });
 }
@@ -186,7 +236,5 @@ function noteChecked(id) {
   domClass.classList.add("toLeftAnim");
   setTimeout(() => {
     domClass.remove();
-  }, 299);
-  /* id.classList.add("toLeftAnim");
-  id.remove(); */
+  }, 290);
 }
