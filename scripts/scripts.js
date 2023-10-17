@@ -1,15 +1,8 @@
 var body = document.querySelector(".notes-box");
-var btnCover = document.querySelector(".btn-menu-cover");
 var btnMenu = document.querySelector(".btn-menu");
 var sidebar = document.querySelector(".sidebar");
 var btnMenuText = document.querySelector(".btn-menu-text");
 var blurBackground = document.querySelector(".blur-background");
-var priorityBox = document.querySelector(".priority-box");
-var confirmBox = document.querySelector(".confirm-box");
-var btnClose = document.querySelector(".confirm-close-icon");
-var priority01 = "rgb(255, 255, 255)";
-var priority02 = "rgb(235, 223, 64)";
-var priority03 = "rgb(235, 58, 58)";
 var currentID = "";
 
 btnMenu.addEventListener("click", openSidebar);
@@ -22,20 +15,15 @@ function openSidebar() {
   if (sidebar.style.display == "flex") {
     closeSidebar();
   } else {
-    var notes = document.querySelectorAll(".note-style-def");
-    notes.forEach((element) => {
-      element.classList.remove("shakeAnim");
-    });
     btnMenuText.innerHTML = "menu";
-    btnMenu.classList.add("btn-menu-normal");
-    btnMenu.classList.remove("btn-menu-cancel");
     sidebar.style.display = "flex";
+    btnMenu.classList.add("anim-btn-menu");
     sidebar.classList.add("openSidebar");
     setTimeout(() => {
       sidebar.style.height = "100px";
       sidebar.classList.remove("openSidebar");
       btnMenu.classList.remove("anim-btn-menu");
-    }, 200);
+    }, 180);
   }
 }
 function closeSidebar() {
@@ -45,20 +33,24 @@ function closeSidebar() {
     sidebar.style.height = "0px";
     sidebar.style.display = "none";
     sidebar.classList.remove("closeSidebar");
-  }, 200);
+  }, 180);
 }
-/* Select Notes */
-document.querySelector(".select-notes").addEventListener("click", selectNotes);
-function selectNotes() {
-  closeSidebar();
-  btnMenuText.innerHTML = "cancel";
-  btnMenu.classList.remove("btn-menu-normal");
-  btnMenu.classList.add("btn-menu-cancel");
-  var notes = document.querySelectorAll(".note-style-def");
-  notes.forEach((element) => {
-    element.classList.add("shakeAnim");
-  });
-}
+
+fetch("database/db.json")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Erro na solicitação: " + response.status);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    const getID = data.notes.note;
+    getID.forEach((element) => {
+      addNewNote();
+    });
+    console.log(getID);
+  })
+  .catch((error) => console.error("Erro:", error));
 
 /* Adding notes */
 var ID_Counter = 1000;
@@ -71,6 +63,7 @@ function addNewNote() {
   ID_Counter++;
   var ID = "ID" + ID_Counter;
 
+  // Create Element
   var newNote = document.createElement("div");
   var noteDesc = document.createElement("input");
 
@@ -80,9 +73,7 @@ function addNewNote() {
   var notePriority = document.createElement("div");
   var notePriorityIcon = document.createElement("img");
 
-  var notePriority2 = document.createElement("div");
-  var notePriorityIcon2 = document.createElement("img");
-
+  // Add class
   newNote.classList.add("note-style-def", "note-style-def", ID);
   noteDesc.placeholder = "Digite o texto...";
   noteDesc.classList.add("note-desc-def", ID);
@@ -95,9 +86,7 @@ function addNewNote() {
   notePriorityIcon.classList.add("note-icon", ID);
   notePriorityIcon.src = "./img/priority.svg";
 
-  notePriority2.classList.add("note-priority2", "flex-center", ID);
-  notePriorityIcon2.classList.add("note-icon", ID);
-  notePriorityIcon2.src = "./img/priority2.svg";
+  // Append in father element
 
   var notesBox = document.querySelector(".notes-box");
 
@@ -110,10 +99,8 @@ function addNewNote() {
   newNote.appendChild(notePriority);
   notePriority.appendChild(notePriorityIcon);
 
-  newNote.appendChild(notePriority2);
-  notePriority2.appendChild(notePriorityIcon2);
-
   // ----------------------- MOVING NOTE -----------------------
+  let isPriority = false;
   let isDragging = false;
   let offsetX;
   //MOUSE DOWN
@@ -130,8 +117,8 @@ function addNewNote() {
 
       if (newNote.offsetLeft >= 60) {
         newNote.style.left = 50 + "px";
-      } else if (newNote.offsetLeft <= -90) {
-        newNote.style.left = -100 + "px";
+      } else if (newNote.offsetLeft <= -40) {
+        newNote.style.left = -50 + "px";
       }
     }
   });
@@ -156,14 +143,22 @@ function addNewNote() {
         newNote.style.left = "0px";
       }, 290);
     }
-    if (newNote.offsetLeft >= -40 && newNote.offsetLeft <= -20) {
-      notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.lastChild);
+    if (newNote.offsetLeft <= -40) {
+      let currentNotePriority = document.querySelector(`.${ID} .note-priority`);
 
-      document.querySelector(`.${currentID}`).style.backgroundColor = "white";
-    }
-    if (newNote.offsetLeft >= -90 && newNote.offsetLeft <= -60) {
-      notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.firstChild);
-      document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 240, 240)";
+      if (isPriority == true) {
+        isPriority = false;
+        currentNotePriority.style.backgroundColor = "rgb(255, 240, 240)";
+
+        notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.lastChild);
+        document.querySelector(`.${currentID}`).style.backgroundColor = "white";
+      } else {
+        isPriority = true;
+        currentNotePriority.style.backgroundColor = "white";
+
+        notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.firstChild);
+        document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 240, 240)";
+      }
     }
   });
   //TOUCH DOWN
@@ -182,8 +177,8 @@ function addNewNote() {
 
       if (newNote.offsetLeft >= 60) {
         newNote.style.left = 50 + "px";
-      } else if (newNote.offsetLeft <= -90) {
-        newNote.style.left = -100 + "px";
+      } else if (newNote.offsetLeft <= -40) {
+        newNote.style.left = -50 + "px";
       }
     }
   });
@@ -208,15 +203,22 @@ function addNewNote() {
       }, 290);
     }
 
-    if (newNote.offsetLeft >= -40 && newNote.offsetLeft <= -20) {
-      notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.lastChild);
+    if (newNote.offsetLeft <= -40) {
+      let currentNotePriority = document.querySelector(`.${ID} .note-priority`);
 
-      document.querySelector(`.${currentID}`).style.backgroundColor = "white";
-    }
-    if (newNote.offsetLeft >= -90 && newNote.offsetLeft <= -60) {
-      notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.firstChild);
+      if (isPriority == true) {
+        isPriority = false;
+        currentNotePriority.style.backgroundColor = "rgb(255, 240, 240)";
 
-      document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 240, 240)";
+        notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.lastChild);
+        document.querySelector(`.${currentID}`).style.backgroundColor = "white";
+      } else {
+        isPriority = true;
+        currentNotePriority.style.backgroundColor = "white";
+
+        notesBox.insertBefore(document.querySelector(`.${currentID}`), notesBox.firstChild);
+        document.querySelector(`.${currentID}`).style.backgroundColor = "rgb(255, 240, 240)";
+      }
     }
   });
 }
