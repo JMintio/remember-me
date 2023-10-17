@@ -36,7 +36,7 @@ function closeSidebar() {
   }, 180);
 }
 
-fetch("database/db.json")
+/* fetch("database/db.json")
   .then((response) => {
     if (!response.ok) {
       throw new Error("Erro na solicitação: " + response.status);
@@ -51,7 +51,8 @@ fetch("database/db.json")
     console.log(getID);
   })
   .catch((error) => console.error("Erro:", error));
-
+ */
+var teste = json.parse;
 /* Adding notes */
 var ID_Counter = 1000;
 addNewNote(); /////////////////////////////////////////////////////////
