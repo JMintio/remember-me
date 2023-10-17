@@ -52,7 +52,9 @@ function closeSidebar() {
   })
   .catch((error) => console.error("Erro:", error));
  */
-var teste = json.parse;
+const json = "database/db.json";
+const obj = JSON.parse(json);
+console.log(obj);
 /* Adding notes */
 var ID_Counter = 1000;
 addNewNote(); /////////////////////////////////////////////////////////
