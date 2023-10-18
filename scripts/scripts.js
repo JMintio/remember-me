@@ -4,7 +4,9 @@ var sidebar = document.querySelector(".sidebar");
 var btnMenuText = document.querySelector(".btn-menu-text");
 var blurBackground = document.querySelector(".blur-background");
 var currentID = "";
+var ID_Counter = 1000;
 
+document.querySelector(".add-new-note").addEventListener("click", addNewNote);
 btnMenu.addEventListener("click", openSidebar);
 body.addEventListener("click", closeSidebar);
 
@@ -36,31 +38,11 @@ function closeSidebar() {
   }, 180);
 }
 
-var importJson = false;
-fetch("database/db.json")
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Erro na solicitação: " + response.status);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    const getID = data.notes;
-    getID.forEach((element) => {
-      importJson = true;
-      if (element) addNewNote(element.ID, element.description);
-    });
-    importJson = false;
-  })
-  .catch((error) => console.error("Erro:", error));
+// ADDING NEW NOTES FUNCTION
+function addNewNote() {
+  var ID = "ID" + ID_Counter;
 
-/* Adding notes */
-var ID_Counter = 1000;
-document.querySelector(".add-new-note").addEventListener("click", addNewNote);
-function addNewNote(jsID, jsDesc, jsPty) {
-  // ADDING NEW NOTES FUNCTION
   /* closeSidebar(); */ ///////////////////////////////////////////////////////////
-
   // Create Element
   var newNote = document.createElement("div");
   var noteDesc = document.createElement("input");
@@ -72,43 +54,19 @@ function addNewNote(jsID, jsDesc, jsPty) {
   var notePriorityIcon = document.createElement("img");
 
   // Add class
-  if (importJson == true) {
-    newNote.classList.add("note-style-def", "note-style-def", jsID);
-    noteDesc.placeholder = "Digite o texto...";
-    noteDesc.classList.add("note-desc-def", jsID);
-    noteDesc.value = jsDesc;
+  ID_Counter++;
+  var ID = "ID" + ID_Counter;
 
-    noteCheck.classList.add("note-check", "flex-center", jsID);
-    noteCheckIcon.classList.add("note-icon", jsID);
-    noteCheckIcon.src = "./img/done.svg";
+  newNote.classList.add("note-style-def", "note-style-def", ID);
+  noteDesc.placeholder = "Digite o texto...";
+  noteDesc.classList.add("note-desc-def", ID);
+  noteCheck.classList.add("note-check", "flex-center", ID);
+  noteCheckIcon.classList.add("note-icon", ID);
+  noteCheckIcon.src = "./img/done.svg";
 
-    notePriority.classList.add("note-priority", "flex-center", jsID);
-    notePriorityIcon.classList.add("note-icon", jsID);
-    notePriorityIcon.src = "./img/priority.svg";
-  } else {
-    ID_Counter++;
-    var ID = "ID" + ID_Counter;
-
-    const element = document.querySelector(`.${ID}`);
-    if (element) {
-      for (ID_Counter; `note-style-def ${ID}` == element.className; ID_Counter++) {
-        ID_Counter++;
-        ID = "ID" + ID_Counter;
-        console.log("DIV REPETIDA");
-      }
-    }
-
-    newNote.classList.add("note-style-def", "note-style-def", ID);
-    noteDesc.placeholder = "Digite o texto...";
-    noteDesc.classList.add("note-desc-def", ID);
-    noteCheck.classList.add("note-check", "flex-center", ID);
-    noteCheckIcon.classList.add("note-icon", ID);
-    noteCheckIcon.src = "./img/done.svg";
-
-    notePriority.classList.add("note-priority", "flex-center", ID);
-    notePriorityIcon.classList.add("note-icon", ID);
-    notePriorityIcon.src = "./img/priority.svg";
-  }
+  notePriority.classList.add("note-priority", "flex-center", ID);
+  notePriorityIcon.classList.add("note-icon", ID);
+  notePriorityIcon.src = "./img/priority.svg";
 
   // Append in father element
 
