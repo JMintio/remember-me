@@ -36,7 +36,8 @@ function closeSidebar() {
   }, 180);
 }
 
-/* fetch("database/db.json")
+var importJson = false;
+fetch("database/db.json")
   .then((response) => {
     if (!response.ok) {
       throw new Error("Erro na solicitação: " + response.status);
@@ -44,27 +45,21 @@ function closeSidebar() {
     return response.json();
   })
   .then((data) => {
-    const getID = data.notes.note;
+    const getID = data.notes;
     getID.forEach((element) => {
-      addNewNote();
+      importJson = true;
+      if (element) addNewNote(element.ID, element.description);
     });
-    console.log(getID);
+    importJson = false;
   })
   .catch((error) => console.error("Erro:", error));
- */
-const json = "database/db.json";
-const obj = JSON.parse(json);
-console.log(obj);
+
 /* Adding notes */
 var ID_Counter = 1000;
-addNewNote(); /////////////////////////////////////////////////////////
-
 document.querySelector(".add-new-note").addEventListener("click", addNewNote);
-function addNewNote() {
+function addNewNote(jsID, jsDesc, jsPty) {
   // ADDING NEW NOTES FUNCTION
   /* closeSidebar(); */ ///////////////////////////////////////////////////////////
-  ID_Counter++;
-  var ID = "ID" + ID_Counter;
 
   // Create Element
   var newNote = document.createElement("div");
@@ -77,17 +72,43 @@ function addNewNote() {
   var notePriorityIcon = document.createElement("img");
 
   // Add class
-  newNote.classList.add("note-style-def", "note-style-def", ID);
-  noteDesc.placeholder = "Digite o texto...";
-  noteDesc.classList.add("note-desc-def", ID);
+  if (importJson == true) {
+    newNote.classList.add("note-style-def", "note-style-def", jsID);
+    noteDesc.placeholder = "Digite o texto...";
+    noteDesc.classList.add("note-desc-def", jsID);
+    noteDesc.value = jsDesc;
 
-  noteCheck.classList.add("note-check", "flex-center", ID);
-  noteCheckIcon.classList.add("note-icon", ID);
-  noteCheckIcon.src = "./img/done.svg";
+    noteCheck.classList.add("note-check", "flex-center", jsID);
+    noteCheckIcon.classList.add("note-icon", jsID);
+    noteCheckIcon.src = "./img/done.svg";
 
-  notePriority.classList.add("note-priority", "flex-center", ID);
-  notePriorityIcon.classList.add("note-icon", ID);
-  notePriorityIcon.src = "./img/priority.svg";
+    notePriority.classList.add("note-priority", "flex-center", jsID);
+    notePriorityIcon.classList.add("note-icon", jsID);
+    notePriorityIcon.src = "./img/priority.svg";
+  } else {
+    ID_Counter++;
+    var ID = "ID" + ID_Counter;
+
+    const element = document.querySelector(`.${ID}`);
+    if (element) {
+      for (ID_Counter; `note-style-def ${ID}` == element.className; ID_Counter++) {
+        ID_Counter++;
+        ID = "ID" + ID_Counter;
+        console.log("DIV REPETIDA");
+      }
+    }
+
+    newNote.classList.add("note-style-def", "note-style-def", ID);
+    noteDesc.placeholder = "Digite o texto...";
+    noteDesc.classList.add("note-desc-def", ID);
+    noteCheck.classList.add("note-check", "flex-center", ID);
+    noteCheckIcon.classList.add("note-icon", ID);
+    noteCheckIcon.src = "./img/done.svg";
+
+    notePriority.classList.add("note-priority", "flex-center", ID);
+    notePriorityIcon.classList.add("note-icon", ID);
+    notePriorityIcon.src = "./img/priority.svg";
+  }
 
   // Append in father element
 
@@ -127,19 +148,18 @@ function addNewNote() {
   });
   //MOUSE UP
   document.addEventListener("mouseup", () => {
-    console.log(newNote.offsetLeft);
     currentID = ID;
     isDragging = false;
     if (newNote.offsetLeft == 60) {
       noteChecked(currentID);
     }
-    if (newNote.offsetLeft > 0) {
+    if (newNote.offsetLeft > 10) {
       newNote.classList.add("noteFromRight");
       setTimeout(() => {
         newNote.classList.remove("noteFromRight");
         newNote.style.left = "0px";
       }, 290);
-    } else if (newNote.offsetLeft < 0) {
+    } else if (newNote.offsetLeft < 10) {
       newNote.classList.add("noteFromLeft");
       setTimeout(() => {
         newNote.classList.remove("noteFromLeft");

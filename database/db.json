@@ -1,24 +1,24 @@
 {
-  "notes": {
-    "note": {
-      "id": "ID1000",
+  "notes": [
+    {
+      "ID": "ID1000",
       "description": "Arroz",
       "isPriority": "False"
     },
-    "note": {
-      "id": "ID1001",
+    {
+      "ID": "ID1001",
       "description": "Feijão",
       "isPriority": "True"
     },
-    "note": {
-      "id": "ID1002",
-      "description": "Feijão",
-      "isPriority": "True"
+    {
+      "ID": "ID1002",
+      "description": "Macarrão",
+      "isPriority": "False"
     },
-    "note": {
-      "id": "ID1003",
-      "description": "Feijão",
+    {
+      "ID": "ID1003",
+      "description": "Carne",
       "isPriority": "True"
     }
-  }
+  ]
 }
