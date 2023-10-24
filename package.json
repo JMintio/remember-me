@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JMintio/remember-me#readme",
   "dependencies": {
+    "firebase": "^10.5.0",
     "mongodb": "^6.2.0"
   }
 }

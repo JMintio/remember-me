@@ -1,26 +1,21 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = "mongodb+srv://jvjuaovitor:<kq0AG9dMwnxIErch>@minimalist.d06j3gt.mongodb.net/?retryWrites=true&w=majority";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAF__3e0G7duYiJufDLVtW2SHi2_51LRXE",
+  authDomain: "remember-me-673c0.firebaseapp.com",
+  projectId: "remember-me-673c0",
+  storageBucket: "remember-me-673c0.appspot.com",
+  messagingSenderId: "1027194512354",
+  appId: "1:1027194512354:web:060b2e2719bae9f6be4fbb",
+  measurementId: "G-WEQYPDLMNT",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
