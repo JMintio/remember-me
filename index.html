@@ -27,6 +27,23 @@
     <div class="blur-background to-center"></div>
 
     <script src="scripts/scripts.js"></script>
-    <script type="module" src="index.js"></script>
+    <!--     <script type="module" src="index.js"></script>
+ -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyAF__3e0G7duYiJufDLVtW2SHi2_51LRXE",
+        authDomain: "remember-me-673c0.firebaseapp.com",
+        projectId: "remember-me-673c0",
+        storageBucket: "remember-me-673c0.appspot.com",
+        messagingSenderId: "1027194512354",
+        appId: "1:1027194512354:web:060b2e2719bae9f6be4fbb",
+        measurementId: "G-WEQYPDLMNT",
+      };
+      const app = initializeApp(firebaseConfig);
+
+      const db = getFirestore(app);
+    </script>
   </body>
 </html>
