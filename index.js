@@ -1,20 +1,37 @@
-/* // Import the functions you need from the SDKs you need
-import firebase from "https://cdn.skypack.dev/@firebase/app";
-import "https://cdn.skypack.dev/@firebase/database"; // TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAF__3e0G7duYiJufDLVtW2SHi2_51LRXE",
-  authDomain: "remember-me-673c0.firebaseapp.com",
-  projectId: "remember-me-673c0",
-  storageBucket: "remember-me-673c0.appspot.com",
-  messagingSenderId: "1027194512354",
-  appId: "1:1027194512354:web:060b2e2719bae9f6be4fbb",
-  measurementId: "G-WEQYPDLMNT",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+/* 
+mongodb+srv://mintiodev:xrrDk3bgEN6c4ZEx@cluster0.jbu4ymw.mongodb.net/
  */
+/* var btnTeste = document.querySelector(".btn-teste");
+btnTeste.addEventListener("click", () => {
+  runSV();
+}); */
+const { MongoClient, ServerApiVersion } = require("mongodb");
+
+const uri = "mongodb+srv://mintiodev:xrrDk3bgEN6c4ZEx@cluster0.jbu4ymw.mongodb.net/";
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+async function run() {
+  try {
+    await client.connect();
+
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+
+    const myDB = client.db("teste");
+    const myColl = myDB.collection("teste-collection");
+    const doc = { ID: "00001", content: "teste" };
+    const result = await myColl.insertOne(doc);
+
+    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+  } finally {
+    await client.close();
+  }
+}
+run().catch(console.dir);
